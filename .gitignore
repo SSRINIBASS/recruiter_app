@@ -1,0 +1,46 @@
+# Dependencies and environments
+node_modules/
+.pnp
+.pnp.js
+.yarn/install-state.gz
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Next.js build and cache
+.next/
+out/
+build/
+
+# Local databases and SQLite
+*.db
+*.sqlite3
+
+# Environment files and credentials
+.env
+.env.local
+.env*.local
+backend/.env
+
+# Static files / Local uploads / Logs
+backend/static/resumes/*
+!backend/static/resumes/.gitkeep
+backend/static/emails/*
+!backend/static/emails/.gitkeep
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS and Editor junk
+.DS_Store
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*Zone.Identifier
+
