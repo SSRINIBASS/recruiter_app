@@ -44,3 +44,16 @@ yarn-error.log*
 *.sw?
 *Zone.Identifier
 
+# Exclude non-production context, journals, brand kits, and documentation
+.ai/
+.context/
+docs/
+journal/
+Brand_kit/
+ideation.md
+CHANGELOG.md
+GENERATE_FRAMEWORK.md
+GENERATE_JOURNAL.md
+eligo_interview_email_template.md
+June_CV_v4.pdf
+Task.pdf
