@@ -1,38 +1,57 @@
-# Eligo — AI Recruitment & Candidate Matching Platform
+# Eligo — Enterprise AI Recruiter & Candidate Matching Platform
 
-Eligo is an AI-powered recruitment application that enables HR professionals and recruiters to upload candidate resumes (PDF/DOCX), automatically parse and extract structured profile data using Google Gemini Flash 1.5, write Job Descriptions (JDs), and perform bulk candidate-to-JD match score evaluations.
+Eligo is a state-of-the-art full-stack AI recruitment platform. It enables HR professionals to upload candidate resumes (PDF/DOCX), parse structured profiles using Google Gemini Flash, define Job Descriptions (JDs), evaluate candidate fit using an evidence-based matching rubric, and automatically generate branded interview outreach emails.
 
-This project was built as a final-round technical demo for the Deloitte fresher AI Engineer position, showcasing clean architecture, real AI integration, and robust full-stack implementation.
+This application showcases clean architecture, modern UI design patterns, resilient mock fallbacks, and real AI integrations.
 
 ---
 
 ## Key Features
 
-- **Resume File Parsing**: Processes `.pdf` and `.docx` resume formats using stream parsers (`pdfplumber` and `python-docx`).
-- **AI-Powered Profile Extraction**: Google Gemini Flash 1.5 automatically parses resumes upon upload to extract Candidate Name, Email, Phone, Skills List, Experience Years, Education, and a professional summary.
-- **Job Description Management**: CRUD endpoints to create, read, and delete job descriptions.
-- **Ranked Match Leaderboards**: Bulk matching compares all candidate profiles in the database against a JD to output an overall fit percentage (0-100), matching skills list, skill gaps (skills requested in JD but missing in candidate), and a fit analysis.
-- **Robust Fail-Safe Design**:
-  - **Mock AI Mode**: If `GEMINI_API_KEY` is not provided, the backend falls back to heuristic-based parsing and matching, ensuring that the entire application remains fully functional and testable.
-  - **Local Storage Fallback**: If Supabase credentials are not provided, resumes are stored locally on the server disk under `backend/static/resumes/` and served as static resources, bypassing the need for cloud setup.
+* **Resume File Parsing:** Processes `.pdf` and `.docx` resume formats using stream parsers (`pdfplumber` and `python-docx`).
+* **AI-Powered Profile Extraction:** Google Gemini automatically parses resumes upon upload to extract Candidate Name, Email, Phone, Skills List, Experience Years, Education, and a professional summary.
+* **Evidence-Based "Proof of Work" Rubric:**
+  * Evaluates candidates by cross-referencing claimed skills against concrete project descriptions, achievements, and certifications.
+  * Strict scoring parameters cap matching scores for claimed-only skills (max 50-60%) while highlighting verified expertise.
+  * Interactive UI tags color-code skills as *Proven* (green), *Claimed Only* (amber), or *Gaps* (gray).
+* **Ranked Match Leaderboards:** 
+  * Bulk matching compares all candidate profiles in the database against a JD to output an overall fit percentage (0-100), matching skills list, skill gaps, and a fit analysis.
+  * Upgraded leaderboard cards highlight the `#1` candidate with a "Top Fit Match" pulsing gradient badge.
+  * Score bars utilize vibrant progress gradients (emerald-teal for high, amber-orange for mid, and rose-red for low alignment).
+* **Personalized Outreach Engine:**
+  * Shortlist candidates and generate invitation emails following the official **Eligo Interview Invitation Template**.
+  * Dynamic variables map first name, contact details, and top skills.
+  * Inserts clear `[TO BE FILLED]` placeholders for logistics (interview round, format, date, time) to let recruiters easily customize details before sending.
+* **Resilient Fail-Safe Design:**
+  * **Mock AI Mode:** If `GEMINI_API_KEY` is not provided, the backend falls back to heuristic-based parsing and matching, keeping the entire application functional.
+  * **Local Storage Fallback:** If Supabase credentials are not provided, resumes are stored locally on the server disk under `backend/static/resumes/` and served as static resources.
+
+---
+
+## Visual Design & Aesthetics
+
+Eligo is designed with a premium, enterprise-ready look, utilizing:
+* **Custom Typography:** Paired Google Fonts (`Plus Jakarta Sans` for the UI and `Playfair Display` for serif headings) to match the brand wordmark.
+* **Ambient Glowing Accents:** Subtle radial gradients (`.ambient-glow-top` and `.ambient-glow-bottom`) add depth behind dashboards.
+* **Glassmorphism Panels:** Semi-transparent, blurred surfaces for sidebars, cards, and modal backdrops.
+* **Micro-Animations:** Fluid hover lifts, glowing card borders, and pulsing state indicators for an interactive experience.
+* **Theme Support:** Clean, class-based Day/Night theme toggles persisted in localStorage with Flash of Unstyled Content (FOUC) prevention.
 
 ---
 
 ## Technology Stack
 
-- **Backend**: Python FastAPI (ASGI web framework) + SQLAlchemy ORM + SQLite (development) / Supabase PostgreSQL (production).
-- **Frontend**: Next.js 14 (App Router) + TypeScript + Tailwind CSS + Tabler Icons.
-- **AI Model**: Google Gemini Flash 1.5.
+* **Backend:** Python FastAPI (ASGI web framework) + SQLAlchemy ORM + SQLite (development) / Supabase PostgreSQL (production) + Google Gemini Flash.
+* **Frontend:** Next.js 14 (App Router) + TypeScript + Tailwind CSS + Tabler Icons.
 
 ---
 
 ## Project Structure
 
+This repository is optimized for production; all non-production metadata, journals, templates, and raw docs are ignored in Git to keep the codebase clean.
+
 ```
 recruiter_app/
-├── .ai/                          — Project intelligence & progress logs
-├── .context/                     — Coding conventions & glossary
-├── docs/                         — Architecture & API contract documents
 ├── backend/                      — Python FastAPI server
 │   ├── main.py                   — Web app entry point & CORS
 │   ├── database.py               — SQLAlchemy configuration
@@ -42,7 +61,8 @@ recruiter_app/
 │   └── services/                 — File parser, storage, and Gemini services
 └── frontend/                     — Next.js React client
     ├── app/                      — Page layouts and dynamic route views
-    ├── components/               — Reusable Notion/Linear design elements
+    ├── components/               — Premium UI elements (Sidebar, MatchCard, etc.)
+    ├── public/                   — SVG/PNG Brand Kit logo assets
     └── lib/api.ts                — Axios-like Fetch client matching contracts
 ```
 
@@ -68,26 +88,22 @@ Install backend dependencies:
 pip install -r requirements.txt
 ```
 
-Create a `.env` file (you can copy `.env.example` as a template):
+Create a `.env` file (you can copy `.env.example` as a template) and add your `GEMINI_API_KEY`:
 ```bash
 cp .env.example .env
 ```
-Update `.env` with your API keys:
-- `DATABASE_URL`: Defaults to local SQLite (`sqlite:///./eligo.db`). Keep this for easy local testing.
-- `GEMINI_API_KEY`: Provide your Google AI Studio key to enable live Gemini parser/matching. If empty, the app runs in **Mock AI Mode**.
-- `SUPABASE_URL` & `SUPABASE_KEY`: Provide to save resumes to Supabase Storage. If empty, the app runs in **Local Storage Fallback** saving files to disk.
+* `DATABASE_URL`: Defaults to local SQLite (`sqlite:///./eligo.db`). Keep this for easy local testing.
 
-Start the backend server:
+Start the backend server as a module from the root directory:
 ```bash
-python3 main.py
+# From the project root recruiter_app/
+backend/venv/bin/python -m backend.main
 ```
 The backend will run on `http://localhost:8000`. You can access interactive Swagger documentation at `http://localhost:8000/docs`.
 
----
-
 ### 2. Frontend Setup (Next.js)
 
-Open a new terminal and navigate to the `frontend/` directory:
+Navigate to the `frontend/` directory:
 ```bash
 cd frontend
 ```
@@ -107,14 +123,3 @@ Start the Next.js development server:
 npm run dev
 ```
 The frontend will run on `http://localhost:3000`.
-
----
-
-## Testing & Verification
-
-1. Open `http://localhost:3000` in your web browser.
-2. Go to **Job Descriptions** and click **New Job Description**. Create a job with requirements (e.g. title: "Senior Python Developer", requirements: "Seeking Python, SQL, FastAPI, Git").
-3. Go to **Upload Resume** and upload a candidate resume file (PDF or DOCX).
-4. After upload, you will be automatically redirected to the parsed candidate detail profile where the AI insights display the parsed skills and summary.
-5. In the right panel of the candidate profile, select the Job Description from the dropdown and click **Evaluate Fit Match** to run a single candidate match.
-6. Alternatively, go to **Job Descriptions** -> select the Job Description -> click **Match All Candidates** to run bulk matching and view the ranked candidate leaderboard.
