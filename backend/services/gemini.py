@@ -155,47 +155,120 @@ def generate_mock_match(candidate_skills: list, experience_years: int, jd_text: 
 
 def generate_outreach_email(
     candidate_name: str,
+    candidate_email: str | None,
+    candidate_top_skill: str | None,
     jd_title: str,
     company: str | None,
-    fit_analysis: str | None,
+    jd_description: str,
     sender_name: str,
 ) -> dict:
     """
-    Generate a personalised recruiter outreach email for a shortlisted candidate.
-    Falls back to a professional static template when Gemini is unavailable.
+    Generate a personalised recruiter outreach email for a shortlisted candidate
+    following the Eligo Interview Invitation Email Template structure.
+    Falls back to a structured static template when Gemini is unavailable.
     Returns { "subject": str, "body": str }
     """
-    company_str = company or "our company"
+    company_str = company or "[TO BE FILLED]"
+    c_email_str = candidate_email or "[TO BE FILLED]"
+    top_skill_str = candidate_top_skill or "your background"
+    first_name = candidate_name.split()[0] if candidate_name else "Candidate"
+    
+    # Define fallback subject and body following the template exactly
+    fallback_subject = f"Interview Invitation — {jd_title} at {company_str}"
+    fallback_body = f"""Dear {first_name},
+
+Thank you for your interest in the {jd_title} role at {company_str}. After reviewing your profile, we were impressed by your background in {top_skill_str} and would like to invite you for an interview.
+
+Please find the details below:
+
+---
+
+**Interview details**
+
+Round: [TO BE FILLED]
+Format: [TO BE FILLED]
+Date: [TO BE FILLED]
+Time: [TO BE FILLED] [TO BE FILLED]
+Duration: [TO BE FILLED]
+Link / Venue: [TO BE FILLED]
+
+---
+
+The interview will be conducted by [TO BE FILLED], [TO BE FILLED]. You may expect questions around [TO BE FILLED].
+
+To confirm your attendance, please reply to this email or use the link below:
+[TO BE FILLED]
+
+If the proposed time does not work for you, feel free to suggest an alternate slot and we will do our best to accommodate.
+
+We look forward to speaking with you. Should you have any questions in the meantime, please do not hesitate to reach out.
+
+Warm regards,
+{sender_name}
+[TO BE FILLED] · {company_str}
+[TO BE FILLED] · [TO BE FILLED]"""
 
     if not has_gemini:
-        subject = f"Exciting Opportunity: {jd_title} at {company_str}"
-        body = (
-            f"Hi {candidate_name},\n\n"
-            f"I hope this message finds you well. My name is {sender_name} and I'm reaching out regarding "
-            f"an exciting opportunity for the role of {jd_title} at {company_str}.\n\n"
-            f"Based on your profile, I believe you would be an excellent fit for this position. "
-            f"{fit_analysis or 'Your background aligns well with what we are looking for.'}\n\n"
-            f"I'd love to set up a quick call to tell you more about the role and learn about your career "
-            f"goals. Please let me know if you're open to a conversation — I'm flexible on timing.\n\n"
-            f"Looking forward to hearing from you!\n\n"
-            f"Best regards,\n{sender_name}"
-        )
-        return {"subject": subject, "body": body}
+        return {"subject": fallback_subject, "body": fallback_body}
 
-    prompt = f"""You are a professional technical recruiter writing a warm, personalised outreach email to a shortlisted candidate.
+    prompt = f"""You are a professional HR assistant for the eligo recruitment platform.
+Your task is to generate an interview invitation email by filling in the template below.
 
-Write a concise, friendly recruiter outreach email. Do NOT use placeholder text like [Your Name]. Use the exact values provided.
+STRICT RULES:
+- Always use the exact template structure below. Never deviate from the format, tone, or signature block.
+- Replace every double curly-bracket variable like {{CANDIDATE_FIRST_NAME}} with the correct value.
+- Do NOT invent or assume values. If a value is not supplied in the inputs, write [TO BE FILLED] in its place.
+- For {{INTERVIEW_FOCUS_AREAS}}, extract 2-3 key technical skills or topics requested in the Job Description text.
+- Do NOT mention the candidate's match score or AI analysis in the email.
+- Return valid JSON only with exactly these keys:
+  - subject: the filled subject line
+  - body: the filled email body starting with "Dear [Candidate First Name]," and ending with the signature block. Use \\n for newlines.
 
-Details:
-- Candidate name: {candidate_name}
-- Role: {jd_title}
-- Company: {company_str}
-- Why they're a good fit: {fit_analysis or 'Strong alignment with the role requirements.'}
-- Sender name (recruiter): {sender_name}
+--- INPUTS ---
+- CANDIDATE_NAME: {candidate_name}
+- CANDIDATE_FIRST_NAME: {first_name}
+- CANDIDATE_EMAIL: {c_email_str}
+- CANDIDATE_TOP_SKILL: {top_skill_str}
+- JOB_TITLE: {jd_title}
+- COMPANY_NAME: {company_str}
+- JOB_DESCRIPTION (for extracting interview focus areas): {jd_description}
+- RECRUITER_NAME: {sender_name}
 
-Return valid JSON only with exactly these keys:
-- subject (string): a compelling email subject line
-- body (string): the full email body, using \\n for newlines. Start with "Hi {candidate_name}," and end with "Best regards,\\n{sender_name}". Keep it under 200 words. Do NOT use markdown formatting.
+--- TEMPLATE ---
+Subject: Interview Invitation — {{JOB_TITLE}} at {{COMPANY_NAME}}
+
+Dear {{CANDIDATE_FIRST_NAME}},
+
+Thank you for your interest in the {{JOB_TITLE}} role at {{COMPANY_NAME}}. After reviewing your profile, we were impressed by your background in {{CANDIDATE_TOP_SKILL}} and would like to invite you for an interview.
+
+Please find the details below:
+
+---
+
+**Interview details**
+
+Round: {{INTERVIEW_ROUND}}
+Format: {{INTERVIEW_FORMAT}}
+Date: {{INTERVIEW_DATE}}
+Time: {{INTERVIEW_TIME}} {{TIMEZONE}}
+Duration: {{DURATION}}
+Link / Venue: {{MEETING_LINK_OR_VENUE}}
+
+---
+
+The interview will be conducted by {{INTERVIEWER_NAME}}, {{INTERVIEWER_DESIGNATION}}. You may expect questions around {{INTERVIEW_FOCUS_AREAS}}.
+
+To confirm your attendance, please reply to this email or use the link below:
+{{CONFIRMATION_LINK}}
+
+If the proposed time does not work for you, feel free to suggest an alternate slot and we will do our best to accommodate.
+
+We look forward to speaking with you. Should you have any questions in the meantime, please do not hesitate to reach out.
+
+Warm regards,
+{{RECRUITER_NAME}}
+{{RECRUITER_DESIGNATION}} · {{COMPANY_NAME}}
+{{RECRUITER_PHONE}} · {{RECRUITER_EMAIL}}
 """
     try:
         model = genai.GenerativeModel('gemini-2.5-flash')
@@ -206,16 +279,7 @@ Return valid JSON only with exactly these keys:
         return clean_json_response(response.text)
     except Exception as e:
         print(f"Gemini outreach generation failed: {e}. Falling back to template.")
-        subject = f"Exciting Opportunity: {jd_title} at {company_str}"
-        body = (
-            f"Hi {candidate_name},\n\n"
-            f"I hope this message finds you well. My name is {sender_name} and I'm reaching out regarding "
-            f"an exciting opportunity for the role of {jd_title} at {company_str}.\n\n"
-            f"{fit_analysis or 'Your background aligns strongly with what we are looking for.'}\n\n"
-            f"I'd love to set up a quick call to discuss this role further. Please let me know your availability.\n\n"
-            f"Best regards,\n{sender_name}"
-        )
-        return {"subject": subject, "body": body}
+        return {"subject": fallback_subject, "body": fallback_body}
 
 
 def match_candidate_to_jd(candidate_analysis: dict, jd_text: str) -> dict:

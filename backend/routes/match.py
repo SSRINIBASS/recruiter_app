@@ -169,18 +169,18 @@ def generate_bulk_outreach(
         if not candidate:
             continue  # Skip unknown IDs gracefully
 
-        # Try to find an existing match record for fit_analysis context
-        match_record = db.query(MatchRecord).filter(
-            MatchRecord.candidate_id == candidate_id,
-            MatchRecord.jd_id == request.jd_id
-        ).first()
-        fit_analysis = match_record.fit_analysis if match_record else None
+        # Extract candidate's top skill from analysis if present
+        candidate_top_skill = None
+        if candidate.analysis and candidate.analysis.skills:
+            candidate_top_skill = candidate.analysis.skills[0]
 
         email_data = generate_outreach_email(
             candidate_name=candidate.name,
+            candidate_email=candidate.email,
+            candidate_top_skill=candidate_top_skill,
             jd_title=jd.title,
             company=jd.company,
-            fit_analysis=fit_analysis,
+            jd_description=jd.description_text,
             sender_name=request.sender_name.strip(),
         )
 
