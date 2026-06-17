@@ -193,6 +193,39 @@ The matching leaderboard is now a highly rigorous, evidence-driven ranking syste
 - Never run production build scripts while the dev hot-reload server is active in the same folder.
 - Always implement a head block blocking script to synchronize localStorage theme state before page layout hydration to prevent FOUC.
 
+---
+
+## 2026-06-17 — Day 4: Rebranding to Eligo, Caching Traps, and Premium Visual Pivots
+
+### Context
+The user requested a full project rebranding from TalentIQ to **Eligo** using a provided brand kit. We were tasked with updating all codebase references, asset configurations, database settings, and transforming the application's visual layout from a flat style into a premium commodity product.
+
+### What We Set Out To Do
+1. Set up the brand assets (SVG/PNG logos, og-banner, favicon) inside a newly created `/frontend/public/` directory.
+2. Update all codebase references (FastAPI app title, database path, Next.js metadata, local storage keys) from TalentIQ to Eligo.
+3. Rename the database file `talentiq.db` to `eligo.db` to preserve all existing demo candidates and match data without loss.
+4. Elevate design aesthetics using Google Fonts (`Plus Jakarta Sans` for UI, `Playfair Display` for headings), custom shadow sets, linear progress gradients, and a pulsing gradient match highlight card.
+5. Safely reload and compile the backend and frontend dev environments on port 8000 and 3000.
+
+### What Actually Happened
+1. **Database Path & Reloading:** Renaming the local database file `talentiq.db` to `eligo.db` and updating `database.py` worked flawlessly. FastAPI's watchfiles reloaded the backend automatically, and a subsequent `/health` curl check returned healthy immediately.
+2. **Next.js Webpack Caching Trap:** Running the production compiler (`npm run build`) while the dev server was running corrupted the `.next/` cache directory, throwing subsequent `404 Not Found` errors for static JS chunks and assets on port 3000. We resolved this by terminating the old Next.js PID (`32142`), clearing the `.next` directory completely, and starting the dev server fresh.
+3. **Google Fonts Offline Fallback:** Because the server run environment is sandboxed and does not have direct internet access, the compiler printed warnings (`Failed to download Plus Jakarta Sans from Google Fonts`). However, Next.js successfully handled the network timeouts and fell back to standard system fonts (sans-serif and Georgia) without crashing.
+4. **Theme-Aware Sidebar Logos:** We resolved dark mode sidebar seams by editing the solid background rect out of `eligo-wordmark-dark.svg` to create `logo-wordmark-dark-transparent.svg`, allowing the white/blue logo path to overlay natively.
+
+### What We Now Understand
+1. **Next.js Caching Separation:** Never mix dev hot-reloads and production build runs in the same workspace directory without clearing cache directories first.
+2. **Static Asset Resolution:** Next.js serves files from `public/` natively, making it the ideal location to drop SVG/PNG branding kits for direct `<img src="...">` consumption.
+3. **Graceful Font Fallbacks:** Designing layout CSS variables to support standard system fallback stacks (like `var(--font-sans), system-ui, sans-serif` and `var(--font-serif), Georgia, serif`) ensures visual consistency even when the environment has no internet access to pull from Google CDN.
+
+### Assumptions Affected
+* **ASSUMPTION-010 (Flat Linear styling):** ❌ Overridden. The user preferred a premium commodity product look over a restricted flat Notion style. Adding soft ambient shadows, custom gradients, card lifts, and pulsing badges successfully achieved a wow factor without breaking the layout.
+* **ASSUMPTION-011 (Database Persistence):** ✅ Validated. Database renaming successfully preserved all candidates, jobs, and matches in `eligo.db` without data loss.
+
+### What This Changes
+The recruiter app is now **Eligo**, featuring a cohesive, modern visual theme that reflects its branding kit. The user experience is enhanced with dynamic card states and professional font parings.
+
+
 
 
 
