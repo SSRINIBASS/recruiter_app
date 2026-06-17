@@ -1,6 +1,6 @@
 # CHANGELOG.md
 
-All notable changes to TalentIQ.
+All notable changes to Eligo.
 Format: [Keep a Changelog](https://keepachangelog.com/) — newest entries at top.
 
 ---

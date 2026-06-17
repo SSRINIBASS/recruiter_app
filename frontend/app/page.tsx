@@ -94,18 +94,18 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 relative">
       {/* Header section */}
       <div className="flex justify-between items-center border-b border-subtle pb-6">
         <div>
-          <h1 className="text-xl font-medium tracking-tight text-text-primary">Recruitment Dashboard</h1>
+          <h1 className="text-2xl font-bold font-serif tracking-tight text-text-primary">Recruitment Dashboard</h1>
           <p className="text-sm text-text-secondary">Overview of candidates, job descriptions, and matches.</p>
         </div>
         
         <div className="flex items-center gap-3">
           <Link
             href="/candidates/upload"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-white text-sm font-medium rounded-md hover:bg-accent/90 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-white text-sm font-medium rounded-md shadow-sm hover:shadow-glow hover:-translate-y-0.5 transition-all duration-300"
           >
             <IconPlus size={16} />
             <span>Upload Resume</span>

@@ -9,13 +9,13 @@ export function ScoreBar({ score, showBar = true }: ScoreBarProps) {
   let textClass = 'text-accent-text bg-accent-light';
   
   if (score >= 70) {
-    fillClass = 'bg-score-high-text';
+    fillClass = 'bg-gradient-to-r from-emerald-500 to-teal-600';
     textClass = 'text-score-high-text bg-score-high-fill';
   } else if (score >= 40) {
-    fillClass = 'bg-score-mid-text';
+    fillClass = 'bg-gradient-to-r from-amber-400 to-orange-500';
     textClass = 'text-score-mid-text bg-score-mid-fill';
   } else {
-    fillClass = 'bg-score-low-text';
+    fillClass = 'bg-gradient-to-r from-rose-500 to-red-600';
     textClass = 'text-score-low-text bg-score-low-fill';
   }
 

@@ -1,6 +1,6 @@
 # ASSUMPTION_TRACKER.md — Assumption Log
 
-**Project:** TalentIQ
+**Project:** Eligo
 **Started:** 2026-06-15
 
 > Every assumption made in this project is logged here at the moment it is made.

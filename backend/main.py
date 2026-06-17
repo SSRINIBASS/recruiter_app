@@ -11,7 +11,7 @@ from .routes import candidates, jobs, analyze, match
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title="TalentIQ API",
+    title="Eligo API",
     description="AI-powered candidate resume parser and job matching service API.",
     version="1.0.0"
 )

@@ -98,7 +98,7 @@ The design relies on borders and background color differences for visual hierarc
 ## Component Rules
 
 ### Sidebar Navigation
-- Logo mark: indigo square with briefcase icon + "TalentIQ" app name
+- Logo mark: indigo square with briefcase icon + "Eligo" app name
 - Nav items: Tabler outline icons, 14px text, weight 400
 - Active state: indigo text (#5B5BD6) + indigo-light background (#EEEDFE)
 - Inactive state: secondary text color, no background

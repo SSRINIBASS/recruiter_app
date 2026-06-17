@@ -14,7 +14,7 @@ import {
 } from '@tabler/icons-react';
 import { api, MatchRecord, OutreachEmailResponse } from '../lib/api';
 
-const SENDER_NAME_KEY = 'talentiq_sender_name';
+const SENDER_NAME_KEY = 'eligo_sender_name';
 
 type ShortlistModalProps = {
   jdId: string;

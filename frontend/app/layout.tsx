@@ -1,22 +1,26 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
+import { Plus_Jakarta_Sans, Playfair_Display } from 'next/font/google';
 import { Sidebar } from '../components/Sidebar';
 import './globals.css';
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  weight: ['400', '500', '600', '700'],
 });
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
+
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-serif',
+  weight: ['400', '500', '600', '700'],
 });
 
 export const metadata: Metadata = {
-  title: 'TalentIQ — AI Recruitment & Candidate Matching Platform',
+  title: 'Eligo — AI Recruitment & Candidate Matching Platform',
   description: 'Upload candidate resumes, parse structured data using Gemini Flash 1.5, define job descriptions, and execute ranked matching algorithms.',
+  icons: {
+    icon: '/logo-icon.svg',
+  },
 };
 
 export default function RootLayout({
@@ -45,8 +49,12 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-full flex bg-surface-primary text-text-primary`}
+        className={`${plusJakartaSans.variable} ${playfairDisplay.variable} antialiased h-full flex bg-surface-primary text-text-primary font-sans relative`}
       >
+        {/* Ambient background glows */}
+        <div className="ambient-glow-top" />
+        <div className="ambient-glow-bottom" />
+
         {/* Left Side Navigation */}
         <Sidebar />
 

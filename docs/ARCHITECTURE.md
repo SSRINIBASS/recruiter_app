@@ -6,7 +6,7 @@
 
 ## System Overview
 
-TalentIQ is a decoupled full-stack application with a Python FastAPI backend and Next.js 14 frontend. The backend serves REST APIs, handles file storage via Supabase Storage, text extraction via pdfplumber/python-docx, AI processing via Gemini Flash 1.5, and persists data in PostgreSQL via SQLAlchemy ORM. The frontend consumes the backend API and renders a clean corporate UI. No authentication layer — the app is an internal HR tool.
+Eligo is a decoupled full-stack application with a Python FastAPI backend and Next.js 14 frontend. The backend serves REST APIs, handles file storage via Supabase Storage, text extraction via pdfplumber/python-docx, AI processing via Gemini Flash 1.5, and persists data in PostgreSQL via SQLAlchemy ORM. The frontend consumes the backend API and renders a clean corporate UI. No authentication layer — the app is an internal HR tool.
 
 ## Architecture Diagram
 

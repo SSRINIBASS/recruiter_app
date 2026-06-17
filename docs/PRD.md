@@ -1,6 +1,6 @@
 # PRD.md — Product Requirements Document
 
-**Product:** TalentIQ
+**Product:** Eligo
 **Version:** 1.0
 **Last Updated:** 2026-06-15
 **Status:** Approved
@@ -11,7 +11,7 @@
 
 Recruiters and HR professionals manually review resumes, cross-reference skills against job descriptions, and rank candidates — a time-consuming process prone to inconsistency and bias. Existing enterprise ATS tools are expensive, complex, and not designed for quick AI-powered candidate-JD matching with transparent skill gap analysis.
 
-TalentIQ solves this by providing an end-to-end pipeline: upload a resume, get AI-extracted structured candidate data, create job descriptions, and match candidates to JDs with ranked scores, matched/missing skill tags, and AI-generated fit analysis — all in a clean, scannable interface.
+Eligo solves this by providing an end-to-end pipeline: upload a resume, get AI-extracted structured candidate data, create job descriptions, and match candidates to JDs with ranked scores, matched/missing skill tags, and AI-generated fit analysis — all in a clean, scannable interface.
 
 ## Target Users
 
@@ -82,7 +82,7 @@ TalentIQ solves this by providing an end-to-end pipeline: upload a resume, get A
 
 ## Competitive Context
 
-TalentIQ is not competing with enterprise ATS tools. It is a focused demo application that demonstrates:
+Eligo is not competing with enterprise ATS tools. It is a focused demo application that demonstrates:
 - Real AI integration with structured output (not mocked)
 - Clean full-stack architecture (FastAPI + Next.js + Postgres)
 - Product thinking (ranked leaderboard, skill gap visualization)

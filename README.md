@@ -1,6 +1,6 @@
-# TalentIQ — AI Recruitment & Candidate Matching Platform
+# Eligo — AI Recruitment & Candidate Matching Platform
 
-TalentIQ is an AI-powered recruitment application that enables HR professionals and recruiters to upload candidate resumes (PDF/DOCX), automatically parse and extract structured profile data using Google Gemini Flash 1.5, write Job Descriptions (JDs), and perform bulk candidate-to-JD match score evaluations.
+Eligo is an AI-powered recruitment application that enables HR professionals and recruiters to upload candidate resumes (PDF/DOCX), automatically parse and extract structured profile data using Google Gemini Flash 1.5, write Job Descriptions (JDs), and perform bulk candidate-to-JD match score evaluations.
 
 This project was built as a final-round technical demo for the Deloitte fresher AI Engineer position, showcasing clean architecture, real AI integration, and robust full-stack implementation.
 
@@ -73,7 +73,7 @@ Create a `.env` file (you can copy `.env.example` as a template):
 cp .env.example .env
 ```
 Update `.env` with your API keys:
-- `DATABASE_URL`: Defaults to local SQLite (`sqlite:///./talentiq.db`). Keep this for easy local testing.
+- `DATABASE_URL`: Defaults to local SQLite (`sqlite:///./eligo.db`). Keep this for easy local testing.
 - `GEMINI_API_KEY`: Provide your Google AI Studio key to enable live Gemini parser/matching. If empty, the app runs in **Mock AI Mode**.
 - `SUPABASE_URL` & `SUPABASE_KEY`: Provide to save resumes to Supabase Storage. If empty, the app runs in **Local Storage Fallback** saving files to disk.
 

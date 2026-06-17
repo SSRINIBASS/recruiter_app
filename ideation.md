@@ -1,8 +1,8 @@
-# TalentIQ — AI-Powered Recruiter App: Complete Ideation Blueprint
+# Eligo — AI-Powered Recruiter App: Complete Ideation Blueprint
 
 ## 1. Project Overview
 
-**App name:** TalentIQ  
+**App name:** Eligo  
 **Purpose:** End-to-end recruitment management tool that uploads resumes, extracts structured candidate data using AI, manages job descriptions, and matches candidates to JDs with a ranked score and fit analysis.  
 **Submission context:** Deloitte final-round project for a fresher AI Engineer candidate. Must demonstrate clean architecture, real AI integration, polished UI, and full deployment.  
 **Target user:** Internal HR / recruiter (no public access, no authentication required).
@@ -203,7 +203,7 @@ Both return: plain string of resume text passed to Gemini prompt
 ## 8. UI Design System
 
 ### 8.1 Visual Identity
-- **App name:** TalentIQ
+- **App name:** Eligo
 - **Style:** Clean corporate (Notion/Linear aesthetic) — flat surfaces, tight borders, generous whitespace
 - **Personality:** Subtle uniqueness via a single indigo accent color used sparingly; everything else neutral
 - **Performance principle:** No gradients, no shadows, no animations — fast to render for HR daily use
@@ -272,7 +272,7 @@ Two weights only: 400 and 500
 ## 9. Project Folder Structure
 
 ```
-talentiq/
+eligo/
 ├── frontend/                          ← Next.js 14 app
 │   ├── app/
 │   │   ├── layout.tsx                 (root layout with sidebar)

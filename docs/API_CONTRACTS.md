@@ -14,7 +14,7 @@
 - All IDs: string UUID (v4)
 - Error format: `{ "detail": "string" }` (FastAPI default)
 - Auth: None — no authentication required
-- Base URL: `${NEXT_PUBLIC_API_URL}` (e.g., `https://talentiq-backend.onrender.com`)
+- Base URL: `${NEXT_PUBLIC_API_URL}` (e.g., `https://eligo-backend.onrender.com`)
 - Content-Type: `application/json` for all responses; `multipart/form-data` for file uploads
 
 ---

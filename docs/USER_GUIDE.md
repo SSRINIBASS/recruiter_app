@@ -1,4 +1,4 @@
-# USER_GUIDE.md — TalentIQ User Guide
+# USER_GUIDE.md — Eligo User Guide
 
 **Version:** 1.0
 **Last Updated:** 2026-06-15
@@ -7,9 +7,9 @@
 
 ## Introduction
 
-TalentIQ is an AI-powered recruitment tool that helps HR professionals manage candidates and job descriptions, and intelligently match the right candidates to the right positions. Upload a resume, and TalentIQ automatically extracts skills, experience, and education. Create a job description, and TalentIQ ranks all candidates by fit — complete with matched skills, skill gaps, and a plain-English explanation.
+Eligo is an AI-powered recruitment tool that helps HR professionals manage candidates and job descriptions, and intelligently match the right candidates to the right positions. Upload a resume, and Eligo automatically extracts skills, experience, and education. Create a job description, and Eligo ranks all candidates by fit — complete with matched skills, skill gaps, and a plain-English explanation.
 
-This guide is written for internal HR personnel / recruiters who will use TalentIQ as a daily tool.
+This guide is written for internal HR personnel / recruiters who will use Eligo as a daily tool.
 
 ---
 
@@ -17,16 +17,16 @@ This guide is written for internal HR personnel / recruiters who will use Talent
 
 ### No Account Required
 
-TalentIQ is an internal tool — no login or account creation needed. Simply open the app URL in your desktop browser and start using it.
+Eligo is an internal tool — no login or account creation needed. Simply open the app URL in your desktop browser and start using it.
 
 ### Your First Upload
 
-The fastest way to see TalentIQ in action:
+The fastest way to see Eligo in action:
 
 1. Click **Candidates** in the left sidebar
 2. Click the **Upload Resume** button
 3. Drag and drop a PDF or DOCX resume file (or click to browse)
-4. Wait a few seconds — TalentIQ will automatically extract the candidate's information using AI
+4. Wait a few seconds — Eligo will automatically extract the candidate's information using AI
 5. You'll be taken to the candidate's detail page showing their skills, experience, education, and a professional summary
 
 ---
@@ -98,7 +98,7 @@ The fastest way to see TalentIQ in action:
 **How to use it — Bulk Match (Leaderboard):**
 1. Go to a job description's detail page
 2. Click **Match All Candidates**
-3. TalentIQ matches every analyzed candidate against this JD
+3. Eligo matches every analyzed candidate against this JD
 4. Results appear as a ranked leaderboard — top candidates first
 5. Each leaderboard card shows: rank, score, matched/gap skills, and fit analysis
 
@@ -168,7 +168,7 @@ A: PDF and DOCX files only.
 A: Resumes are stored in secure cloud storage (Supabase). The app does not share data externally. For production use, authentication should be added.
 
 **Q: Can I use this on mobile?**
-A: TalentIQ is designed for desktop use. Mobile access is not currently supported.
+A: Eligo is designed for desktop use. Mobile access is not currently supported.
 
 ---
 

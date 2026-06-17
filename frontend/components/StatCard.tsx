@@ -7,12 +7,12 @@ type StatCardProps = {
 
 export function StatCard({ label, value, subtitle, icon: Icon }: StatCardProps) {
   return (
-    <div className="bg-surface-secondary rounded-lg p-4 flex flex-col justify-between h-28 relative">
+    <div className="bg-surface-primary border border-subtle rounded-lg p-5 flex flex-col justify-between h-32 relative shadow-premium hover:shadow-premium-hover hover:-translate-y-0.5 transition-all duration-300">
       <div>
-        <div className="text-xs uppercase font-medium text-text-secondary tracking-wider">
+        <div className="text-xs uppercase font-semibold text-text-secondary tracking-wider">
           {label}
         </div>
-        <div className="text-xl font-medium text-text-primary mt-2">
+        <div className="text-2xl font-bold text-text-primary mt-2">
           {value}
         </div>
       </div>
@@ -24,8 +24,8 @@ export function StatCard({ label, value, subtitle, icon: Icon }: StatCardProps) 
       )}
 
       {Icon && (
-        <div className="absolute right-4 top-4 text-text-secondary/50">
-          <Icon className="w-5 h-5" />
+        <div className="absolute right-5 top-5 w-8 h-8 rounded-full bg-accent-light text-accent flex items-center justify-center shadow-sm">
+          <Icon className="w-4 h-4" />
         </div>
       )}
     </div>

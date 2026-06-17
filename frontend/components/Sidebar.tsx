@@ -8,7 +8,6 @@ import {
   IconUsers, 
   IconBriefcase, 
   IconUpload, 
-  IconSparkles,
   IconSun,
   IconMoon
 } from '@tabler/icons-react';
@@ -52,11 +51,12 @@ export function Sidebar() {
   return (
     <aside className="w-64 bg-surface-secondary border-r border-subtle h-screen flex flex-col fixed left-0 top-0">
       {/* Brand logo section */}
-      <div className="h-16 flex items-center px-6 border-b border-subtle gap-3">
-        <div className="w-8 h-8 bg-accent rounded-md flex items-center justify-center text-white">
-          <IconSparkles size={18} />
-        </div>
-        <span className="font-medium text-lg tracking-tight text-accent-text">TalentIQ</span>
+      <div className="h-16 flex items-center px-6 border-b border-subtle justify-center">
+        {theme === 'dark' ? (
+          <img src="/logo-wordmark-dark-transparent.svg" alt="eligo" className="h-9 w-auto object-contain" />
+        ) : (
+          <img src="/logo-wordmark-light.svg" alt="eligo" className="h-9 w-auto object-contain" />
+        )}
       </div>
 
       {/* Navigation Links */}

@@ -15,15 +15,15 @@ export function MatchCard({ match, rank }: MatchCardProps) {
     <div
       className={`bg-surface-primary rounded-lg p-6 border ${
         isTopRank
-          ? 'border-accent ring-1 ring-accent/30'
-          : 'border-subtle'
-      } transition-colors flex flex-col md:flex-row md:items-center justify-between gap-6`}
+          ? 'border-accent shadow-glow'
+          : 'border-subtle shadow-premium hover:shadow-premium-hover'
+      } hover:-translate-y-0.5 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-6`}
     >
       {/* Rank and Info */}
       <div className="flex items-start gap-4 flex-1">
         {/* Rank Number */}
         <span
-          className={`text-xl font-medium tracking-tight mt-1 ${
+          className={`text-xl font-semibold tracking-tight mt-1 ${
             isTopRank ? 'text-accent' : 'text-text-secondary'
           }`}
         >
@@ -32,10 +32,16 @@ export function MatchCard({ match, rank }: MatchCardProps) {
 
         {/* Candidate Details */}
         <div className="space-y-3 flex-1">
-          <div className="flex items-center gap-3">
-            <span className="text-lg font-medium text-text-primary">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-lg font-semibold text-text-primary">
               {match.candidate_name || 'Candidate Name'}
             </span>
+            {isTopRank && (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-gradient-to-r from-accent to-indigo-600 text-white shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                Top Fit Match
+              </span>
+            )}
           </div>
 
           {/* Fit Explanation */}

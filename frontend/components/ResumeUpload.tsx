@@ -72,10 +72,10 @@ export function ResumeUpload({ onUploadSuccess, onUploadStart }: ResumeUploadPro
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={triggerFileSelect}
-        className={`w-full min-h-[220px] rounded-lg border-2 border-dashed flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-colors ${
+        className={`w-full min-h-[240px] rounded-lg border-2 border-dashed flex flex-col items-center justify-center p-8 text-center cursor-pointer transition-all duration-300 group shadow-premium hover:shadow-premium-hover ${
           isDragging 
-            ? 'border-accent bg-accent-light/40' 
-            : 'border-subtle hover:bg-surface-secondary/40'
+            ? 'border-accent bg-accent-light/40 shadow-glow scale-[1.01]' 
+            : 'border-subtle hover:border-accent/40 hover:bg-surface-secondary/40'
         } ${loading ? 'pointer-events-none opacity-80' : ''}`}
       >
         <input
@@ -88,28 +88,30 @@ export function ResumeUpload({ onUploadSuccess, onUploadStart }: ResumeUploadPro
         />
 
         {loading ? (
-          <div className="flex flex-col items-center gap-3">
-            <IconLoader2 className="w-8 h-8 text-accent animate-spin" />
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent">
+              <IconLoader2 className="w-6 h-6 animate-spin" />
+            </div>
             <div>
-              <p className="text-base font-medium text-text-primary">Uploading & Parsing Resume...</p>
-              <p className="text-sm text-text-secondary mt-1">Gemini AI is extracting candidate profile info.</p>
+              <p className="text-base font-semibold text-text-primary">Uploading &amp; Parsing Resume...</p>
+              <p className="text-sm text-text-secondary mt-1">Gemini AI is generating the Candidate profile.</p>
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-accent-light flex items-center justify-center text-accent">
-              <IconUpload size={20} />
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-accent-light flex items-center justify-center text-accent shadow-sm transition-transform duration-300 group-hover:scale-110">
+              <IconUpload size={22} className="transition-transform duration-300 group-hover:-translate-y-0.5" />
             </div>
             <div>
-              <p className="text-base font-medium text-text-primary">
-                Drag and drop your resume file here
+              <p className="text-base font-semibold text-text-primary">
+                Drag and drop candidate resume here
               </p>
               <p className="text-sm text-text-secondary mt-1">
-                or <span className="text-accent font-medium hover:text-accent-text transition-colors">browse files</span> from your computer
+                or <span className="text-accent font-medium group-hover:text-accent-text transition-colors">browse files</span> from your computer
               </p>
             </div>
-            <p className="text-xs text-text-secondary font-medium tracking-wide uppercase mt-1">
-              Supports PDF, DOCX
+            <p className="text-xs text-text-secondary font-semibold tracking-wider uppercase bg-surface-secondary border border-subtle px-2 py-0.5 rounded-sm mt-1">
+              PDF, DOCX
             </p>
           </div>
         )}

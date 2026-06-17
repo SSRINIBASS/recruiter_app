@@ -1,6 +1,6 @@
 # LEARNING_JOURNAL.md — Project Learning Log
 
-**Project:** TalentIQ
+**Project:** Eligo
 **Started:** 2026-06-15
 
 > This is the human story of this project.
@@ -32,7 +32,7 @@ morning?" — skip the entry. If you can answer it in one sentence — write the
 
 ### Context
 
-The project is at the very start — ideation is complete, all 14 framework files have been generated and verified, but not a single line of application code has been written. TalentIQ is being built as a Deloitte final-round submission for a fresher AI Engineer position. The timeline is aggressive: 2 days, solo developer, full-stack app with real AI integration and production deployment. Everything that follows is belief — none of it has been tested against reality yet.
+The project is at the very start — ideation is complete, all 14 framework files have been generated and verified, but not a single line of application code has been written. Eligo is being built as a Deloitte final-round submission for a fresher AI Engineer position. The timeline is aggressive: 2 days, solo developer, full-stack app with real AI integration and production deployment. Everything that follows is belief — none of it has been tested against reality yet.
 
 ### What We Set Out To Do
 

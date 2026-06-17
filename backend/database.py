@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./talentiq.db")
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./eligo.db")
 
 # Fix compatibility issue with newer SQLAlchemy versions requiring 'postgresql://' instead of 'postgres://'
 if DATABASE_URL.startswith("postgres://"):

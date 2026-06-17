@@ -1,6 +1,6 @@
 # INTERVIEW_PREP.md — Technical Review & Interview Preparation
 
-**Project:** TalentIQ
+**Project:** Eligo
 **Last Generated:** 2026-06-16
 **Generated From:** LEARNING_JOURNAL.md, ASSUMPTION_TRACKER.md, all framework files
 
@@ -24,7 +24,7 @@
 ## Section 1 — Product Thinking
 
 **Q: What problem does this product solve and why does it matter?**
-A: Recruiters manually review resumes, cross-reference skills against job descriptions, and rank candidates — a time-consuming process prone to inconsistency. TalentIQ automates this with an end-to-end pipeline: upload a resume, get AI-extracted structured data (skills, experience, education), create job descriptions, and match candidates to JDs with ranked scores, skill tags showing exactly what matches and what's missing, and an AI-generated fit analysis. The value is speed and consistency — a recruiter can scan a ranked leaderboard and understand candidate fit in 2 seconds instead of 20 minutes.
+A: Recruiters manually review resumes, cross-reference skills against job descriptions, and rank candidates — a time-consuming process prone to inconsistency. Eligo automates this with an end-to-end pipeline: upload a resume, get AI-extracted structured data (skills, experience, education), create job descriptions, and match candidates to JDs with ranked scores, skill tags showing exactly what matches and what's missing, and an AI-generated fit analysis. The value is speed and consistency — a recruiter can scan a ranked leaderboard and understand candidate fit in 2 seconds instead of 20 minutes.
 *Source: [PRD.md](file:///home/quark/Projects/recruiter_app/docs/PRD.md) Problem Statement, [Journal Day 0](file:///home/quark/Projects/recruiter_app/journal/LEARNING_JOURNAL.md) "What We Set Out To Do"*
 
 **Q: Who is the target user and how do you know?**
@@ -144,9 +144,9 @@ If you had 10 minutes to brief a lead dev who had read nothing, say this:
 
 ---
 
-TalentIQ is an AI-powered recruiter application I built as a Deloitte final-round submission for an AI Engineer position. The problem it solves is straightforward: recruiters spend hours manually reading resumes and comparing them to job descriptions. TalentIQ automates that. You upload a resume — PDF or DOCX — and the system extracts the candidate's skills, experience, education, and a professional summary using Google's Gemini Flash. Then you create a job description, hit "Match All Candidates," and get a ranked leaderboard showing who fits best. 
+Eligo is an AI-powered recruiter application I built as a Deloitte final-round submission for an AI Engineer position. The problem it solves is straightforward: recruiters spend hours manually reading resumes and comparing them to job descriptions. Eligo automates that. You upload a resume — PDF or DOCX — and the system extracts the candidate's skills, experience, education, and a professional summary using Google's Gemini Flash. Then you create a job description, hit "Match All Candidates," and get a ranked leaderboard showing who fits best. 
 
-Unlike simple keyword matching systems, TalentIQ uses an evidence-based "Proof of Work" matching rubric. Candidates who claim skills without backing them up with concrete projects, achievements, or experience descriptions get their match scores capped (maximum of 50–60). Proven skills are highlighted in green, claimed-only skills in amber, and missing requirements in gray. 
+Unlike simple keyword matching systems, Eligo uses an evidence-based "Proof of Work" matching rubric. Candidates who claim skills without backing them up with concrete projects, achievements, or experience descriptions get their match scores capped (maximum of 50–60). Proven skills are highlighted in green, claimed-only skills in amber, and missing requirements in gray. 
 
 The architecture is a decoupled full-stack app. The frontend is Next.js 14 with App Router, styled with Tailwind CSS in a clean Notion-like aesthetic that supports a Day/Night theme toggle with zero page-load color flashes. The backend is Python FastAPI, which gives me auto-generated Swagger docs at `/docs` — anyone can hit the API and see it working without the frontend. I used SQLAlchemy as the ORM so I can develop locally with SQLite and deploy against Supabase's managed Postgres without changing code. Resume files are stored in Supabase Storage with local static file serving fallbacks. The AI layer is Gemini Flash with `response_mime_type: "application/json"` to ensure structured JSON output.
 
